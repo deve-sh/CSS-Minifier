@@ -1,5 +1,17 @@
 /*
-	A simple CSS Minifier
+	A simple CSS Minifier.
+	
+	Author : Devesh Kumar.
+
+	Process : 
+	---------
+
+	1. Get the CSS.
+	2. Iterate over it character by character.
+	3. Check if we are inside a comment. If yes, no need to add any characters inside the comment.
+	4. If not, check if the character is a line break or an unnecessary whitespace. If yes, don't add it.
+	5. If not, add the character to the minified css.
+	6. Return the Minified CSS.
 */
 
 // Main function to minify CSS.
@@ -13,9 +25,9 @@ function cssminifier(css = ""){
 
 	// Required Variables
 
-	let minifiedcss = ``,
-		inComment = false,
-		spaceregex = /^[\s{}:]$/;
+	let minifiedcss = ``,			// The string that will later be the minified css.
+		inComment = false,			// Variable to keep track whether the iterator is part of a comment.
+		spaceregex = /^[\s{}:]$/;	// Regex to check whether the character next to the current character is a punctuation mark and hence, doesn't need to be added.
 
 	for(let char = 0; char < css.length; char++){
 		// Iterating over the css char by char.
