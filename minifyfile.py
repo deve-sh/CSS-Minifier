@@ -37,7 +37,7 @@ def minifyfile(filename):
 	namelist[0] = namelist[0]+"-min"
 
 	for namecomponent in namelist:
-		toedit += (namecomponent + ".")
+		toedit += (namecomponent + ".")		# Adding . at every run since there may be more than one seperator dot in the file name.
 
 	try:
 		minifiedfile = open(toedit,"w")		# Opening the file to write.
