@@ -1,6 +1,6 @@
 /*
 	A simple CSS Minifier.
-	
+
 	Author : Devesh Kumar.
 
 	Process : 
@@ -27,20 +27,20 @@ function cssminifier(css = ""){
 
 	let minifiedcss = ``,			// The string that will later be the minified css.
 		inComment = false,			// Variable to keep track whether the iterator is part of a comment.
-		spaceregex = /^[\s{}:]$/;	// Regex to check whether the character next to the current character is a punctuation mark and hence, doesn't need to be added.
+		spaceregex = /^[\s{}:;]$/;	// Regex to check whether the character next to the current character is a punctuation mark and hence, doesn't need to be added.
 
 	for(let char = 0; char < css.length; char++){
 		// Iterating over the css char by char.
 
 		if(inComment === false){
-			if(css[char] === '\n'){
-				// Removing line breaks.
-				continue;
-			}
-			else if(css[char] === '/' && css[char + 1] === '*'){
-				// Start of a comment.
+			if(css[char] === '/' && css[char + 1] === '*'){
+				// Checking for the start of a comment.
 				inComment = true;	// We are inside a comment. Don't add anything unless it gets over.
 				char++;				// No need to evaluate next character.
+				continue;
+			}
+			else if(css[char] === '\n'){
+				// Removing line breaks.
 				continue;
 			}
 			else if(/\s/.test(css[char]) && (spaceregex.test(css[char + 1]) || spaceregex.test(css[char - 1]))){
@@ -79,3 +79,25 @@ function cssminifier(css = ""){
 
 	return minifiedcss;
 }
+
+// Test Block
+// Remove the '*/' from below to run the test block.
+
+/*
+let bigcss = `
+			\/* This is a comment.	*/
+\/* Unaligned Comment. *\/
+
+.body	{
+	background : #ffffff;
+	text-align : 	center;		\/* Another Comment *\/
+}
+
+
+.header {
+	color : blue	;
+}
+`
+
+console.log(cssminifier(bigcss));
+*/
