@@ -23,7 +23,7 @@ import re		# Regex Library
 def cssminifier(css = ""):
 	# Checking type of CSS
 	if(type(css) is not str):
-		print("Invalid Type CSS Passed.")
+		print("\nInvalid Type CSS Passed.")
 		exit()		# End execution
 
 	# Required Variables
